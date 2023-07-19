@@ -14,7 +14,7 @@ if (!(array_key_exists('HTTP_REFERER', $_SERVER)) && str_contains($_SERVER['HTTP
 }
 
 
-
+// Add a transaction on BDD and on index
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $dateCreate = $_POST['date']; 
@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
 
 
 
-// DELETE TASK
+// DELETE transaction
 if (isset($_GET['delete'])) {
     $id_transaction = $_GET['delete'];
     $query = $dbCo->prepare("DELETE FROM transaction WHERE id_transaction = :id_transaction");
@@ -50,7 +50,7 @@ if (isset($_GET['delete'])) {
 }
 
 
-
+//Edit transaction
 if (isset($_POST['edit'])) {
     $name = $_POST['name'];
     $dateCreate = $_POST['date']; 
