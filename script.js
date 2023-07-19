@@ -14,6 +14,8 @@ const editButtons = document.querySelectorAll(".btn-outline-primary");
 console.log(editButtons);
 editButtons.forEach((button) => {
     button.addEventListener("click", e => {
+        const div = document.querySelector(`div.d-none`)
+        div.classList
         const id = e.target.dataset.id;
         const name = time.querySelector(`[data-text-id="${id}"]`).innerText;
         const transactionId = this.getAttribute("data-id");

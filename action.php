@@ -33,3 +33,39 @@ if (isset($_POST['submit'])) {
     header('Location: http://localhost/account/?msg=' . ($isOk ? 'La transaction a été ajoutée' : 'Un problème a été rencontré lors de l\'ajout de la transaction'));
     exit;
 }
+
+
+
+
+// DELETE TASK
+if (isset($_GET['delete'])) {
+    $id_transaction = $_GET['delete'];
+    $query = $dbCo->prepare("DELETE FROM transaction WHERE id_transaction = :id_transaction");
+    $isOk = $query->execute([
+        ':id_transaction' => intval(strip_tags($id_transaction))
+    ]);
+
+    header('Location: index.php?msg=' . ($isOk ? 'La tâche a été supprimée' : 'La tâche n\'a pas pu être supprimée'));
+    exit;
+}
+
+
+
+if (isset($_POST['edit'])) {
+    $name = $_POST['name'];
+    $dateCreate = $_POST['date']; 
+    $amount = $_POST['amount'];
+    $idCategory = $_POST['category'];
+    var_dump($name);
+    $query = $dbCo->prepare("UPDATE transaction SET (name, amount, date_transaction, id_category) VALUES (:name, :amount, :date_transaction, :id_category)");
+    $isOk = $query->execute([
+        ':name' => strip_tags($name),
+        ':amount' => intval($amount),
+        ':date_transaction' => $dateCreate,
+        ':id_category' => intval(strip_tags($idCategory)) 
+        
+    ]);
+    
+    header('Location: http://localhost/account/?msg=' . ($isOk ? 'La transaction a été ajoutée' : 'Un problème a été rencontré lors de l\'ajout de la transaction'));
+    exit;
+}
